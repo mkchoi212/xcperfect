@@ -16,8 +16,8 @@ coverage_file_name = ''
 coverage_targets = []
 
 printer_options = {
-  unicode: XCPerfect::Terminal.unicode?,
-  colorize: XCPerfect::Terminal.color?,
+  ascii: false,
+  colorize: STDOUT.tty?,
   formatter: XCPerfect::Simple
 }
 
@@ -32,8 +32,12 @@ OptionParser.new do |opts|
     printer_options[:formatter] = XCPerfect::Simple
   end
 
-  opts.on('--[no-]color', 'Toggle colorized output. Default is auto') do |value|
+  opts.on('--[no-]color', 'Toggle colorized output. Default depends on your terminal') do |value|
     printer_options[:colorize] = value
+  end
+
+  opts.on('--ascii', 'Use characters in output. Default is false') do |value|
+    printer_options[:ascii] = value
   end
 
   opts.on('-t', '--targets x,y', Array, 'Select targets to display code coverage data') do |targets|

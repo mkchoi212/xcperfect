@@ -7,14 +7,14 @@ module XCPerfect
 
     attr_reader :parser
 
-    def initialize(use_unicode, colorize, json)
-      @use_unicode = use_unicode
+    def initialize(use_ascii, colorize, json)
+      @use_ascii = use_ascii
       @colorize = colorize
       @parser = Parser.new(json)
     end
 
-    def pretty_format(text, schemes)
-      puts text
+    def pretty_format(targets)
+      puts @json
     end
   end
 end

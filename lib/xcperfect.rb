@@ -1,5 +1,4 @@
 require 'xcperfect/version'
-require 'xcperfect/terminal'
 require 'xcperfect/printer'
 require 'xcperfect/parser'
 require 'xcperfect/formatters/formatter'

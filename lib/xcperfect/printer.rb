@@ -6,7 +6,7 @@ module XCPerfect
 
     def initialize(params, json)
       klass = params[:formatter]
-      @formatter = klass.new(params[:unicode], params[:colorize], json)
+      @formatter = klass.new(params[:ascii], params[:colorize], json)
     end
 
     def pretty_print(targets)
