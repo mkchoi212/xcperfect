@@ -1,0 +1,74 @@
+#!/usr/bin/env ruby
+
+if RUBY_VERSION < '2.0.0'
+  abort 'error: XCPerfect requires Ruby 2.0.0 or higher.'
+end
+
+if $PROGRAM_NAME == __FILE__
+  $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+end
+
+require 'xcperfect'
+require 'optparse'
+require 'json'
+
+coverage_file_name = ''
+coverage_targets = []
+
+printer_options = {
+  unicode: XCPerfect::Terminal.unicode?,
+  colorize: XCPerfect::Terminal.color?,
+  formatter: XCPerfect::Simple
+}
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: xcrun xccov --json [options] | xcperfect'
+
+  opts.on('-a', '--all', 'Show all code coverage information (Default)') do
+    printer_options[:formatter] = XCPerfect::All
+  end
+
+  opts.on('-s', '--simple', 'Simplify coverage output') do
+    printer_options[:formatter] = XCPerfect::Simple
+  end
+
+  opts.on('--[no-]color', 'Toggle colorized output. Default is auto') do |value|
+    printer_options[:colorize] = value
+  end
+
+  opts.on('-t', '--targets x,y', Array, 'Select targets to display code coverage data') do |targets|
+    coverage_targets = targets
+  end
+
+  opts.on('-f', '--file FILENAME', 'Path to xccov generated json file') do |fname|
+    coverage_file_name = fname
+  end
+
+  opts.on_tail('-h', '--help', 'Show this help message') do
+    puts opts
+    exit
+  end
+
+  opts.on_tail('-v', '--version', 'Show xcperfect version') do
+    puts XCPerfect::VERSION
+    exit
+  end
+
+  opts.parse!
+end
+
+json = nil
+
+if coverage_file_name. == ''
+  json = JSON.parse(STDIN.gets)
+else
+  lines = File.readlines(coverage_file_name)
+  if lines.length == 1
+    json = JSON.parse(lines[0])
+  else
+    exit
+  end
+end
+
+printer = XCPerfect::Printer.new(printer_options, json)
+printer.pretty_print(coverage_targets)
