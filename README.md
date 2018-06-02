@@ -21,6 +21,12 @@ $ xcrun xccov --json [options] > report.json
 $ xcperfect report.json
 ```
 
+or
+
+```bash
+$ xcperfect [--file | -f] report.json [options]
+```
+
 ## Formats
 
 - `--all`, `-a` **Default**
