@@ -10,8 +10,12 @@ module XCPerfect
     end
 
     def pretty_functions(file)
-      file['functions'].map do |function|
+      stats = file['functions'].map do |function|
+        pretty_coverage_info(function)
       end
+
+      rows = align(stats)
+      rows.map { |row| "\t\t" + row.join(' ') }
     end
 
     def pretty_files(target)
@@ -22,8 +26,8 @@ module XCPerfect
       end.join("\n")
     end
 
-    def pretty_format(targets)
-      @parser.extract(targets).map do |target|
+    def pretty_format(desirables)
+      @parser.extract_targets(desirables).map do |target|
         [pretty_name(target), pretty_files(target)]
       end.join("\n")
     end
