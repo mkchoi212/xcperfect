@@ -10,15 +10,16 @@ module XCPerfect
     end
 
     def pretty_functions(file)
-      stats = file['functions'].map do |function|
+      file['functions'].map do |function|
         filename = file['name']
-        stats = pretty_coverage_info(function)
-        stats[0] = Syntax.highlight(filename, stats[0])
-        stats
+        signature, covered, total, percentage = pretty_coverage_info(function)
+        line_stat = [covered, total].join(' / ').ljust(10)
+        stats = [line_stat, percentage].join("\t\t")
+        highlighted = Syntax.highlight(filename, signature)
+        delta = highlighted.length - signature.length
+        fill_size = (@terminal_width / 1.5) + delta
+        "\t\t" + [highlighted.ljust(fill_size), stats].join(' ')
       end
-
-      rows = align(stats)
-      rows.map { |row| "\t\t" + row.join(' ') }
     end
 
     def pretty_files(target)
