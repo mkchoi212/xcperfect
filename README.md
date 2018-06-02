@@ -27,6 +27,8 @@ $ xcperfect report.json
 
 - `--simple`, `-s`
 
+![Simple Formatter](./assets/simple_formatter.png)
+
 ## ✋ Contributing
 
 This is an open source project so feel free to contribute by
