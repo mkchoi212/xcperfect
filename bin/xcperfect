@@ -18,7 +18,7 @@ coverage_targets = []
 printer_options = {
   ascii: false,
   colorize: STDOUT.tty?,
-  formatter: XCPerfect::Simple
+  formatter: XCPerfect::All
 }
 
 OptionParser.new do |opts|
