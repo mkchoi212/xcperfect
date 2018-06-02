@@ -1,0 +1,55 @@
+Layout/SpaceAroundEqualsInParameterDefault:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 80
+  Exclude:
+    - 'bin/xcperfect'
+    - 'lib/xcperfect/**/*.rb'
+
+Metrics/MethodLength:
+  Enabled: false
+
+Performance/Count:
+  Enabled: true
+
+Performance/Size:
+  Enabled: true
+
+Performance/StringReplacement:
+  Enabled: true
+
+Style/BarePercentLiterals:
+  Enabled: false
+
+# Configuration parameters: IndentWhenRelativeTo, SupportedStyles, IndentOneStep.
+Style/DoubleNegation:
+  Exclude:
+    - 'lib/xcperfect/ansi.rb'
+
+Style/PercentQLiterals:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: true
+  Exclude:
+    - 'xcperfect.gemspec'
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/UnneededPercentQ:
+  Exclude:
+    - 'xcperfect.gemspec'
