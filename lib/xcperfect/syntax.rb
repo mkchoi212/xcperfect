@@ -15,35 +15,24 @@ module XCPerfect
   # Syntax highlights the function signatures displayed to the user
   # while using the `all.rb` formatter
   module Syntax
-    def self.highlight(snippet)
-      return snippet.contents unless Rouge
-      highlight_with_formatter(snippet, Rouge::Formatters::Terminal256.new)
+    def self.highlight(filename, line)
+      return signature unless Rouge
+      highlight_with_formatter(filename, line, Rouge::Formatters::Terminal256.new)
     end
 
-    def self.highlight_html(snippet)
-      return snippet.contents unless Rouge
-      highlight_with_formatter(snippet, Rouge::Formatters::HTML.new)
-    end
-
-    def self.highlight_with_formatter(snippet, formatter)
-      if snippet.file_path.include?(':')
-        filename = snippet.file_path.rpartition(':').first
-      else
-        filename = snippet.file_path
-      end
-
-      lexer = find_lexer(filename, snippet.contents)
+    def self.highlight_with_formatter(filename, line, formatter)
+      lexer = find_lexer(filename, line)
       if lexer
-        formatter.format(lexer.lex(snippet.contents))
+        formatter.format(lexer.lex(line)).rstrip
       else
-        snippet.contents
+        line
       end
     end
 
     # @param [String] filename The filename
-    # @param [String] contents The contents of the file
+    # @param String line of code to be highlighted
     # @return [Rouge::Lexer]
-    def self.find_lexer(filename, contents)
+    def self.find_lexer(filename, line)
       case File.extname(filename)
       when '.cpp', '.cc', '.c++', '.cxx', '.hpp', '.h++', '.hxx'
         Rouge::Lexers::Cpp
@@ -53,7 +42,7 @@ module XCPerfect
       else
         options = {
           filename: File.basename(filename),
-          source: contents
+          source: line
         }
         Rouge::Lexer.guesses(options).first
       end

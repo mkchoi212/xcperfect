@@ -11,7 +11,10 @@ module XCPerfect
 
     def pretty_functions(file)
       stats = file['functions'].map do |function|
-        pretty_coverage_info(function)
+        filename = file['name']
+        stats = pretty_coverage_info(function)
+        stats[0] = Syntax.highlight(filename, stats[0])
+        stats
       end
 
       rows = align(stats)
