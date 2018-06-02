@@ -1,6 +1,8 @@
 require 'xcperfect/ansi'
 
 module XCPerfect
+  # Printer handles the initialization of the output formatter
+  # and is directly called by the main `xcperfect` file during execution
   class Printer
     attr_reader :formatter
 
@@ -11,10 +13,8 @@ module XCPerfect
 
     def pretty_print(targets)
       formatted_text = formatter.pretty_format(targets)
-      unless formatted_text == ''
-        STDOUT.print(formatted_text)
-        STDOUT.flush
-      end
+      STDOUT.print(formatted_text + "\n")
+      STDOUT.flush
     end
   end
 end

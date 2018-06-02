@@ -74,5 +74,7 @@ else
   end
 end
 
+json['name'] = 'Total coverage'
+
 printer = XCPerfect::Printer.new(printer_options, json)
 printer.pretty_print(coverage_targets)
