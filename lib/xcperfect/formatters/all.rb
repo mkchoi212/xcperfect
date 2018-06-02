@@ -9,9 +9,16 @@ module XCPerfect
       [symbol, white(target['name'])].join(' ')
     end
 
+    def pretty_functions(file)
+      file['functions'].map do |function|
+      end
+    end
+
     def pretty_files(target)
       target['files'].map do |file|
-        "\t" + pretty_name(file)
+        name = "\t" + pretty_name(file)
+        function = pretty_functions(file)
+        [name, function]
       end.join("\n")
     end
 
