@@ -5,27 +5,19 @@ module XCPerfect
   # - Total number of lines
   # - Coverage percentage
   class Simple < Formatter
-    def format_coverage_percentage(target)
-      percentage = @parser.coverage_percentage(target)
-      color_percentage(percentage)
+    def pretty_coverage_info(target)
+      info = @parser.extract_coverage_info(target)
+      info[3] = color_percentage(info[3])
+      info
     end
 
-    def extract_simple_info(target)
-      [
-        target['name'],
-        @parser.covered_line_num(target).to_s,
-        @parser.total_line_num(target).to_s,
-        format_coverage_percentage(target)
-      ]
-    end
-
-    def pretty_format(targets)
+    def pretty_format(desirables)
       output = [['Target', 'Covered', 'Out of', 'Percentage']]
 
-      @parser.extract(targets).each do |target|
-        output << extract_simple_info(target)
+      @parser.extract_targets(desirables).each do |target|
+        output << pretty_coverage_info(target)
       end
-      output << extract_simple_info(@parser.json)
+      output << pretty_coverage_info(@parser.json)
 
       rows = align(output)
       sentences = rows.collect { |row| row.join(' ') }

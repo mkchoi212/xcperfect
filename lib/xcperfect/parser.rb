@@ -16,17 +16,26 @@ module XCPerfect
       @json[KEY_TARGETS]
     end
 
-    def extract(targets)
-      if targets.length.zero?
+    def extract_targets(desirables)
+      if desirables.length.zero?
         all_targets
       else
         all_targets.select do |target_info|
           pure_name = target_info['name'].split('.')
           pure_name.pop(1)
           pure_name = pure_name.join('.')
-          targets.include?(pure_name)
+          desirables.include?(pure_name)
         end
       end
+    end
+
+    def extract_coverage_info(target)
+      [
+        target['name'],
+        covered_line_num(target).to_s,
+        total_line_num(target).to_s,
+        coverage_percentage(target)
+      ]
     end
 
     def coverage_percentage(target)
