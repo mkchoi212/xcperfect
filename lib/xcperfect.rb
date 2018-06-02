@@ -1,6 +1,7 @@
 require 'xcperfect/version'
 require 'xcperfect/printer'
 require 'xcperfect/parser'
+require 'xcperfect/syntax'
 require 'xcperfect/formatters/formatter'
 require 'xcperfect/formatters/all'
 require 'xcperfect/formatters/simple'

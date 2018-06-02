@@ -32,8 +32,8 @@ module XCPerfect
     def extract_coverage_info(target)
       [
         target['name'],
-        covered_line_num(target).to_s,
-        total_line_num(target).to_s,
+        covered_line_num(target),
+        total_line_num(target),
         coverage_percentage(target)
       ]
     end

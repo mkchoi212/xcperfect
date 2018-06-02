@@ -32,6 +32,11 @@ module XCPerfect
       end
     end
 
+    def pretty_coverage_info(target)
+      name, covered, total, percentage = @parser.extract_coverage_info(target)
+      [name, covered.to_s, total.to_s, color_percentage(percentage)]
+    end
+
     def align_formats(arrays)
       column_sizes = arrays.map(&:length)
       common_column_size = column_sizes[0]
