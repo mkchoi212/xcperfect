@@ -11,6 +11,7 @@ module XCPerfect
       @use_ascii = use_ascii
       @colorize = colorize
       @parser = Parser.new(json)
+      @terminal_width = Integer(`tput cols`)
     end
 
     def pretty_format(___)
@@ -28,7 +29,7 @@ module XCPerfect
       when 66..100
         green(percent_str)
       else
-        raise "Percentage of #{percentage} is not possible :("
+        raise "Percentage of #{percentage} % is not possible :("
       end
     end
 
@@ -40,6 +41,10 @@ module XCPerfect
     def align_formats(arrays)
       column_sizes = arrays.map(&:length)
       common_column_size = column_sizes[0]
+      if column_sizes.to_set.length != 1
+        puts column_sizes
+        raise 'All rows must have same number of columns to be aligned'
+      end
 
       (0...common_column_size).map do |column|
         width = arrays.map { |row| strip(row[column]).length }.max
