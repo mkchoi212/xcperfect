@@ -10,10 +10,10 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.0.0'
   spec.description =
     %q{
-    Formatter for Apple's xccov json output because who doesn't
+    Make your xccov output prettier. Because who doesn't
     like pretty outputs? Am I rite?
     }
-  spec.summary       = %q(Make your xccov outputs prettier)
+  spec.summary       = %q(Better looking xccov reports)
   spec.homepage      = 'https://github.com/mkchoi212/xcperfect'
   spec.license       = 'MIT'
 
