@@ -5,6 +5,9 @@
     <a href="https://travis-ci.org/mkchoi212/xcperfect">
       <img src="https://travis-ci.org/mkchoi212/xcperfect.svg?branch=master">
     </a>
+    <a href="https://badge.fury.io/rb/xcperfect">
+      <img src="https://badge.fury.io/rb/xcperfect.svg">
+    </a>
   </p>
 </p>
 <br>
