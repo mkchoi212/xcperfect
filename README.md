@@ -1,6 +1,13 @@
-# xcperfect
-
-xcperfect makes xccov outputs prettier
+<p align="center">
+  <img src="./assets/banner.png">
+  <br>
+  <p align="center">
+    <a href="https://travis-ci.org/mkchoi212/xcperfect">
+      <img src="https://travis-ci.org/mkchoi212/xcperfect.svg?branch=master">
+    </a>
+  </p>
+</p>
+<br>
 
 ## Installation
 
