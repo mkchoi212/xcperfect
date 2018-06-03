@@ -11,20 +11,26 @@ module XCPerfect
 
     def pretty_functions(file)
       file['functions'].map do |function|
+        width = @terminal_width - 8
+
         filename = file['name']
-        signature, covered, total, percentage = pretty_coverage_info(function)
-        line_stat = [covered, total].join(' / ').ljust(10)
-        stats = [line_stat, percentage].join("\t\t")
+        signature, covered, total, percentage = @parser.extract_coverage_info(function)
+
+        line_stats = "#{covered} / #{total}".ljust(10)
         highlighted = Syntax.highlight(filename, signature)
+
         delta = highlighted.length - signature.length
-        fill_size = (@terminal_width / 1.5) + delta
-        "\t\t" + [highlighted.ljust(fill_size), stats].join(' ')
+        highlighted = highlighted.ljust((width * 0.6) + delta)
+
+        texts = spaces(8) + [highlighted, line_stats].join(' ')
+        bar = Bar.create(percentage, (width * 0.3) - line_stats.length, @colorize, @use_ascii)
+        texts + bar
       end
     end
 
     def pretty_files(target)
       target['files'].map do |file|
-        name = "\t" + pretty_name(file)
+        name = spaces(4) + pretty_name(file)
         function = pretty_functions(file)
         [name, function]
       end.join("\n")

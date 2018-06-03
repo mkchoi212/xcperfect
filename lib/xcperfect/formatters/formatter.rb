@@ -1,4 +1,5 @@
 require 'xcperfect/ansi'
+require 'xcperfect/bar'
 require 'xcperfect/parser'
 
 module XCPerfect
@@ -19,19 +20,14 @@ module XCPerfect
       puts @json
     end
 
-    def color_percentage(percentage)
-      percent_str = percentage.to_s + ' %'
+    def spaces(cnt)
+      ' ' * cnt
+    end
 
-      case percentage.round
-      when 0..33
-        red(percent_str)
-      when 33...66
-        orange(percent_str)
-      when 66..100
-        green(percent_str)
-      else
-        raise "Percentage of #{percentage} % is not possible :("
-      end
+    def color_percentage(percentage)
+      color_func = color_for(percentage)
+      str_rep = (percentage * 100).to_s + ' %'
+      color_func.call(str_rep)
     end
 
     def pretty_coverage_info(target)

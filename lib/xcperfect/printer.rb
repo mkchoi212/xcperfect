@@ -1,5 +1,3 @@
-require 'xcperfect/ansi'
-
 module XCPerfect
   # Printer handles the initialization of the output formatter
   # and is directly called by the main `xcperfect` file during execution

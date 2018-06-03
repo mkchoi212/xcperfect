@@ -1,3 +1,4 @@
+require 'xcperfect/bar'
 require 'xcperfect/version'
 require 'xcperfect/printer'
 require 'xcperfect/parser'

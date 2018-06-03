@@ -39,7 +39,7 @@ module XCPerfect
     end
 
     def coverage_percentage(target)
-      (target['lineCoverage'] * 100).round(2)
+      target['lineCoverage'].round(2)
     end
 
     def covered_line_num(target)

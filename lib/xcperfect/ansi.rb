@@ -27,6 +27,19 @@ module XCPerfect
       !!@colorize
     end
 
+    def color_for(percentage)
+      case (percentage * 100).round
+      when 0..33
+        ->(x) { red(x) }
+      when 33...66
+        ->(x) { yellow(x) }
+      when 66..100
+        ->(x) { green(x) }
+      else
+        raise "Percentage of #{percentage * 100} is not possible"
+      end
+    end
+
     def white(text)
       ansi_parse(text, :plain, :bold)
     end
