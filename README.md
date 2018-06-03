@@ -20,22 +20,19 @@ $ gem install xcperfect
 
 ## Usage
 
-```bash
-$ xcrun xccov --json [options] | xcperfect
-```
-
-or 
+- Pipe
 
 ```bash
-$ xcrun xccov --json [options] > report.json
-$ xcperfect report.json
+$ xcrun xccov --json [options] | xcperfect [options]
 ```
 
-or
+- Feed it in via flags
 
 ```bash
 $ xcperfect [--file | -f] report.json [options]
 ```
+
+> ⚠️ Please note that `xcperfect` only takes in `xccov` json output
 
 ## Formats
 
