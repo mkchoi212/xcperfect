@@ -2,6 +2,7 @@ require 'xcperfect/ansi'
 require 'xcperfect/parser'
 
 module XCPerfect
+  # Formatter is the base adopted by `all.rb` and `simple.rb`
   class Formatter
     include ANSI
 

@@ -4,6 +4,9 @@ Layout/SpaceAroundEqualsInParameterDefault:
 Metrics/AbcSize:
   Enabled: false
 
+Metrics/BlockLength:
+  ExcludedMethods: ['new']
+
 Metrics/LineLength:
   Max: 80
   Exclude:
