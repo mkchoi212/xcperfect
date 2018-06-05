@@ -47,8 +47,8 @@ module XCPerfect
     end
 
     def pretty_overall(target)
-      signature, covered, total, percentage = @parser.extract_coverage_info(target)
-      line_stats = "Total #{covered} / #{total}".ljust(STAT_WIDTH + 10) 
+      _, covered, total, percentage = @parser.extract_coverage_info(target)
+      line_stats = "Total #{covered} / #{total}".ljust(STAT_WIDTH + 10)
       bar = Bar.create(percentage, bar_width, @colorize, @use_ascii)
       summary = line_stats + ' ' + bar
       color_delta = bar.length - strip(bar).length

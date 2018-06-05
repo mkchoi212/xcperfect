@@ -38,9 +38,11 @@ $ xcperfect [--file | -f] report.json [options]
 
 - `--all`, `-a` **Default**
 
+![All](./assets/all.png)
+
 - `--simple`, `-s`
 
-![Simple Formatter](./assets/simple_formatter.png)
+![Simple](./assets/simple.png)
 
 ## ✋ Contributing
 
