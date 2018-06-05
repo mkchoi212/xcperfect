@@ -32,7 +32,7 @@ $ xcrun xccov --json [options] | xcperfect [options]
 $ xcperfect [--file | -f] report.json [options]
 ```
 
-> ⚠️ Please note that `xcperfect` only takes in `xccov` json output
+> ⚠️ Please note that `xcperfect` only takes in `xccov`'s `--json` output
 
 ## Formats
 
@@ -51,6 +51,11 @@ This is an open source project so feel free to contribute by
 - Opening an [issue](https://github.com/mkchoi212/xcperfect/issues/new)
 - Sending me feedback via [email](mailto://mkchoi212@icloud.com)
 - Or [tweet](https://twitter.com/Bananamlkshake2) at your boi!
+
+## Note
+
+The name `xcperfect` is not trying to convey that the code is perfect by any means.
+The code is far from perfect as this is my first Ruby project; PRs are welcome and appreciated 😀
 
 ## LICENSE
 
