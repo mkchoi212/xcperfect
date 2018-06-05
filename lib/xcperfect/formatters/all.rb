@@ -3,7 +3,7 @@ module XCPerfect
   class All < Formatter
     DOWN = '▼'.freeze
     DOWN_ASCII = '->'.freeze
-    STAT_WIDTH = 10
+    STAT_WIDTH = 9
 
     def bar_width
       ((@terminal_width - 8) * 0.3) - STAT_WIDTH
@@ -30,7 +30,10 @@ module XCPerfect
         highlighted = highlighted.ljust(signature_width + delta)
 
         texts = spaces(8) + [highlighted, line_stats].join(' ')
+        leftover = @terminal_width - texts.length + delta
         bar = Bar.create(percentage, bar_width, @colorize, @use_ascii)
+        color_delta = bar.length - strip(bar).length
+        bar = bar.rjust(leftover + color_delta - 1)
         texts + bar
       end
     end
@@ -43,9 +46,18 @@ module XCPerfect
       end.join("\n")
     end
 
+    def pretty_overall(target)
+      signature, covered, total, percentage = @parser.extract_coverage_info(target)
+      line_stats = "Total #{covered} / #{total}".ljust(STAT_WIDTH + 10) 
+      bar = Bar.create(percentage, bar_width, @colorize, @use_ascii)
+      summary = line_stats + ' ' + bar
+      color_delta = bar.length - strip(bar).length
+      summary.rjust(@terminal_width + color_delta - 1)
+    end
+
     def pretty_format(desirables)
       @parser.extract_targets(desirables).map do |target|
-        [pretty_name(target), pretty_files(target)]
+        [pretty_name(target), pretty_files(target), pretty_overall(target)]
       end.join("\n")
     end
   end

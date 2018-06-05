@@ -14,11 +14,12 @@ module XCPerfect
 
       progress_length = (bar_length * percentage).round
       filled = block_symbol * progress_length
-      remaining = red('-' * (bar_length - progress_length))
+      remaining = red('-' * (bar_length - progress_length + 1))
 
       color_func = color_for(percentage)
       bar = color_func.call(filled) + remaining
-      "|#{bar}| #{percentage * 100} %"
+      percentage = "#{percentage * 100} %".rjust(7)
+      "|#{bar}| #{percentage}"
     end
   end
 end
