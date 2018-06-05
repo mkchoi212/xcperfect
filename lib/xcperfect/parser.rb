@@ -12,8 +12,15 @@ module XCPerfect
       @json = json
     end
 
-    def all_targets
-      @json[KEY_TARGETS]
+    def valid?
+      expected_project_keys = %w[coveredLines lineCoverage targets executableLines name]
+      expected_target_keys = %w[coveredLines lineCoverage name files executableLines buildProductPath]
+
+      return false unless (expected_project_keys - @json.keys).length.zero?
+
+      all_targets.each do |target|
+        return false unless (expected_target_keys - target.keys).length.zero?
+      end
     end
 
     def extract_targets(desirables)
@@ -27,6 +34,10 @@ module XCPerfect
           desirables.include?(pure_name)
         end
       end
+    end
+
+    def all_targets
+      @json[KEY_TARGETS]
     end
 
     def extract_coverage_info(target)

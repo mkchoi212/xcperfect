@@ -85,7 +85,7 @@ end
 
 json['name'] = 'Total coverage'
 
-if XCPerfect::Parser.new(json).verify
+if XCPerfect::Parser.new(json).valid?
   printer = XCPerfect::Printer.new(printer_options, json)
   printer.pretty_print(coverage_targets)
 else
