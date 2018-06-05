@@ -44,6 +44,14 @@ $ xcperfect [--file | -f] report.json [options]
 
 ![Simple](./assets/simple.png)
 
+- `--html` **(COMING SOON)**
+
+## ⚙️ Options
+
+- `--[no]-color`: turn on or off coloring **(default is on)**
+- `--[no]-utf8`: turn on or off usage of UTF-8 for output **(default is on)**
+- `-t, --targets=x,y,z`: choose targets to generate reports for
+
 ## ✋ Contributing
 
 This is an open source project so feel free to contribute by
@@ -57,7 +65,8 @@ This is an open source project so feel free to contribute by
 The name `xcperfect` is not trying to convey that the code is perfect by any means.
 The code is far from perfect as this is my first Ruby project; PRs are welcome and appreciated 😀
 
+> ❗ Fun fact! xcperfect has only one dependency - `rouge` - for syntax highlighting. So if you are already using [xcpretty](https://github.com/supermarin/xcpretty), no additional dependencies are required
+
 ## LICENSE
 
-Please look at [LICENSE.md](./LICENSE.md)
-
+[LICENSE.md](./LICENSE.md)
