@@ -62,19 +62,32 @@ OptionParser.new do |opts|
 end
 
 json = nil
+@colorize = printer_options[:colorize]
 
-if coverage_file_name. == ''
-  json = JSON.parse(STDIN.gets)
-else
-  lines = File.readlines(coverage_file_name)
-  if lines.length == 1
-    json = JSON.parse(lines[0])
+begin
+  if coverage_file_name. == ''
+    stdin = STDIN.gets
+    if stdin.rstrip == ''
+      XCPerfect.exit_with_error('No coverage data provided', printer_options[:colorize])
+    end
+    json = JSON.parse(stdin)
   else
-    exit
+    lines = File.readlines(coverage_file_name)
+    if lines.length == 1
+      json = JSON.parse(lines[0])
+    else
+      XCPerfect.exit_with_error('Input JSON should only be one line', printer_options[:colorize])
+    end
   end
+rescue
+  XCPerfect.exit_with_error('Invalid JSON detected', printer_options[:colorize])
 end
 
 json['name'] = 'Total coverage'
 
-printer = XCPerfect::Printer.new(printer_options, json)
-printer.pretty_print(coverage_targets)
+if XCPerfect::Parser.new(json).verify
+  printer = XCPerfect::Printer.new(printer_options, json)
+  printer.pretty_print(coverage_targets)
+else
+  XCPerfect.exit_with_error('Provided JSON does not follow xccov json output format', printer_options[:colorize])
+end
